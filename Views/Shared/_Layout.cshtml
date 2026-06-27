@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EmployeeManagementSystem</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <i class="bi bi-buildings-fill"></i>
+                <span>EMS</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a class="sidebar-link" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-house-door-fill"></i> <span>Dashboard</span>
+                </a>
+                <a class="sidebar-link" asp-area="" asp-controller="Departments" asp-action="Index">
+                    <i class="bi bi-diagram-3-fill"></i> <span>Departments</span>
+                </a>
+                <a class="sidebar-link" asp-area="" asp-controller="Employees" asp-action="Index">
+                    <i class="bi bi-people-fill"></i> <span>Employees</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                &copy; 2026 EMS
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <div class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <div class="topbar-icon-box">
+                        <i class="bi bi-building"></i>
+                    </div>
+                    <div>
+                        <div class="topbar-system-name">Employee Management System</div>
+                        <h5 class="mb-0">@ViewData["Title"]</h5>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <div class="topbar-greeting">
+                        @{
+                            var currentHour = DateTime.Now.Hour;
+                            var greeting = currentHour < 12 ? "Good Morning" : currentHour < 17 ? "Good Afternoon" : "Good Evening";
+                        }
+                        <span class="greeting-text">@greeting, Admin</span>
+                        <span class="topbar-date"><i class="bi bi-calendar3"></i> @DateTime.Now.ToString("dd MMM yyyy")</span>
+                    </div>
+
+                    <select class="dept-filter-select" id="deptFilter" onchange="window.location.href='/Employees?departmentId=' + this.value">
+                        <option value="">All Departments</option>
+                        @if (ViewBag.DepartmentList != null)
+                        {
+                            foreach (var dept in ViewBag.DepartmentList)
+                            {
+                                <option value="@dept.DepartmentId">@dept.DepartmentName</option>
+                            }
+                        }
+                    </select>
+
+                    <button id="themeToggle" class="theme-toggle-btn">
+                        <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+                    </button>
+
+                    <div class="topbar-avatar">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                </div>
+            </header>
+            <main class="page-content">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleBtn = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+
+            function updateIcon(theme) {
+                themeIcon.className = theme === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-stars-fill';
+            }
+
+            updateIcon(document.documentElement.getAttribute('data-theme'));
+
+            toggleBtn.addEventListener('click', function () {
+                const current = document.documentElement.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+                updateIcon(next);
+            });
+        });
+    </script>
+</body>
+</html>
