@@ -60,6 +60,7 @@ public class EmployeesController : Controller
         }
 
         var employee = await _context.Employees
+            .Include(e => e.Department)
             .FirstOrDefaultAsync(m => m.EmployeeId == employeeid);
         if (employee == null)
         {
@@ -106,6 +107,8 @@ public class EmployeesController : Controller
         {
             return NotFound();
         }
+
+        ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "DepartmentName", employee.DepartmentId);
         return View(employee);
     }
 
@@ -153,6 +156,7 @@ public class EmployeesController : Controller
         }
 
         var employee = await _context.Employees
+            .Include(e => e.Department)
             .FirstOrDefaultAsync(m => m.EmployeeId == employeeid);
         if (employee == null)
         {

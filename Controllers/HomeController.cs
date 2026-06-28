@@ -23,7 +23,7 @@ namespace EmployeeManagementSystem.Controllers
             ViewBag.TotalDepartments = await _context.Departments.CountAsync();
 
             ViewBag.AverageSalary = await _context.Employees.AnyAsync()
-                ? await _context.Employees.AverageAsync(e => e.Salary)
+                ? await _context.Employees.AverageAsync(e => (double)e.Salary)
                 : 0;
             var topDepartment = await _context.Employees
     .Include(e => e.Department)

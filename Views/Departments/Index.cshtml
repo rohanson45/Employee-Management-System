@@ -27,9 +27,9 @@
                     <h5 class="mt-3 mb-1">@item.DepartmentName</h5>
                     <p class="text-muted small mb-3">@(item.Employees?.Count ?? 0) employee(s) assigned</p>
                     <div class="d-flex gap-3">
-                        <a asp-action="Edit" asp-route-id="@item.DepartmentId" class="action-link">Edit</a>
-                        <a asp-action="Details" asp-route-id="@item.DepartmentId" class="action-link">Details</a>
-                        <a asp-action="Delete" asp-route-id="@item.DepartmentId" class="action-link delete">Delete</a>
+                        <a asp-action="Edit" asp-route-departmentid="@item.DepartmentId" class="action-link">Edit</a>
+                        <a asp-action="Details" asp-route-departmentid="@item.DepartmentId" class="action-link">Details</a>
+                        <a asp-action="Delete" asp-route-departmentid="@item.DepartmentId" class="action-link delete">Delete</a>
                     </div>
                 </div>
             </div>

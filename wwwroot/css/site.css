@@ -52,6 +52,22 @@
     [data-theme="dark"] .topbar-date {
         color: var(--text-secondary);
     }
+    [data-theme="dark"] table.styled-table tbody tr:hover {
+        background-color: #2a2d3a;
+    }
+
+    [data-theme="dark"] table.styled-table td {
+        color: var(--text-primary);
+    }
+
+    [data-theme="dark"] table.styled-table th {
+        color: var(--text-secondary);
+        border-bottom-color: var(--border-color);
+    }
+
+    [data-theme="dark"] table.styled-table tbody tr {
+        border-bottom-color: var(--border-color);
+    }
 
 :root {
     --sidebar-width: 250px;
@@ -597,3 +613,57 @@ table.styled-table {
     .btn-cancel:hover {
         background-color: #e2e8f0;
     }
+
+.delete-warning {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #fef2f2;
+    color: #b91c1c;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    font-size: 0.9rem;
+}
+
+    .delete-warning i {
+        font-size: 1.2rem;
+    }
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+    .detail-row:last-of-type {
+        border-bottom: none;
+    }
+
+.detail-label {
+    font-weight: 600;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.detail-value {
+    color: #1a1a2e;
+    font-size: 0.95rem;
+}
+
+.btn-delete-confirm {
+    background-color: #dc2626;
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+    .btn-delete-confirm:hover {
+        background-color: #b91c1c;
+    }
+

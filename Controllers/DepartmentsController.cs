@@ -32,6 +32,7 @@ public class DepartmentsController : Controller
         }
 
         var department = await _context.Departments
+            .Include(d => d.Employees)
             .FirstOrDefaultAsync(m => m.DepartmentId == departmentid);
         if (department == null)
         {
@@ -115,7 +116,8 @@ public class DepartmentsController : Controller
     }
 
     // GET: DEPARTMENTS/Delete/5
-    public async Task<IActionResult> Delete(int? departmentid)
+    
+   public async Task<IActionResult> Delete(int? departmentid)
     {
         if (departmentid == null)
         {
@@ -123,6 +125,7 @@ public class DepartmentsController : Controller
         }
 
         var department = await _context.Departments
+            .Include(d => d.Employees)
             .FirstOrDefaultAsync(m => m.DepartmentId == departmentid);
         if (department == null)
         {

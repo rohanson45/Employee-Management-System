@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject EmployeeManagementSystem.Data.ApplicationDbContext DbContext
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -56,12 +57,9 @@
 
                     <select class="dept-filter-select" id="deptFilter" onchange="window.location.href='/Employees?departmentId=' + this.value">
                         <option value="">All Departments</option>
-                        @if (ViewBag.DepartmentList != null)
+                        @foreach (var dept in DbContext.Departments.OrderBy(d => d.DepartmentName))
                         {
-                            foreach (var dept in ViewBag.DepartmentList)
-                            {
-                                <option value="@dept.DepartmentId">@dept.DepartmentName</option>
-                            }
+                            <option value="@dept.DepartmentId">@dept.DepartmentName</option>
                         }
                     </select>
 
