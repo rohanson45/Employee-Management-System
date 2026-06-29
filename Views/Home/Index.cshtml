@@ -47,7 +47,7 @@
             </div>
             <div>
                 <div class="stat-value">@ViewBag.TopDepartmentName</div>
-                <div class="stat-label">Top Department (@ViewBag.TopDepartmentCount employees)</div>
+                <div class="stat-label">Top Department (@ViewBag.TopDepartmentCount @(ViewBag.TopDepartmentCount == 1 ? "employee" : "employees"))</div>
             </div>
         </div>
     </div>

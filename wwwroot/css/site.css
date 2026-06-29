@@ -45,6 +45,7 @@
     [data-theme="dark"] .stat-value {
         color: var(--text-primary);
     }
+
     [data-theme="dark"] .greeting-text {
         color: var(--text-primary);
     }
@@ -52,6 +53,7 @@
     [data-theme="dark"] .topbar-date {
         color: var(--text-secondary);
     }
+
     [data-theme="dark"] table.styled-table tbody tr:hover {
         background-color: #2a2d3a;
     }
@@ -107,6 +109,35 @@ html, body {
     top: 0;
     left: 0;
     height: 100vh;
+    z-index: 1050;
+    transition: transform 0.25s ease;
+}
+
+.sidebar-toggle-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 1.4rem;
+    color: #1a1a2e;
+    cursor: pointer;
+    padding: 4px 8px;
+    margin-right: 4px;
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    z-index: 1040;
+}
+
+.sidebar-overlay-visible {
+    display: block;
+}
+
+body.sidebar-locked {
+    overflow: hidden;
 }
 
 .sidebar-brand {
@@ -123,6 +154,17 @@ html, body {
         font-size: 1.6rem;
         color: var(--primary-color);
     }
+
+.sidebar-close-btn {
+    display: none;
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    color: #cbd5e1;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px 8px;
+}
 
 .sidebar-nav {
     flex: 1;
@@ -334,6 +376,7 @@ table.styled-table {
 .bg-orange {
     background-color: #ea580c;
 }
+
 .stat-icon.bg-purple {
     background-color: #8b5cf6;
 }
@@ -667,3 +710,156 @@ table.styled-table {
         background-color: #b91c1c;
     }
 
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* Tablet and below: sidebar becomes an off-canvas drawer */
+@media (max-width: 991px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+        .sidebar.sidebar-open {
+            transform: translateX(0);
+        }
+
+    .sidebar-close-btn {
+        display: block;
+    }
+
+    .sidebar-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tablet: tighten up spacing a bit */
+@media (max-width: 991px) and (min-width: 577px) {
+    .page-content {
+        padding: 20px;
+    }
+
+    .topbar {
+        padding: 14px 20px;
+    }
+
+    .topbar-left {
+        padding-left: 0;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 576px) {
+    .page-content {
+        padding: 14px;
+    }
+
+    .topbar {
+        padding: 12px 14px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .topbar-left {
+        padding-left: 0;
+        gap: 8px;
+    }
+
+    .topbar-system-name {
+        font-size: 0.7rem;
+    }
+
+    .topbar-left h5 {
+        font-size: 1rem;
+    }
+
+    .topbar-right {
+        gap: 10px;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .topbar-greeting {
+        align-items: flex-start;
+    }
+
+    .dept-filter-select {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .theme-toggle-btn,
+    .topbar-avatar {
+        width: 34px;
+        height: 34px;
+    }
+
+    /* Stat cards: stack to single column on phones */
+    .stat-card {
+        padding: 16px;
+    }
+
+    .stat-value {
+        font-size: 1.3rem;
+    }
+
+    .stat-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+    }
+
+    /* Forms */
+    .form-card {
+        padding: 18px;
+        max-width: 100%;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn-create,
+    .btn-cancel,
+    .btn-delete-confirm {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    /* Tables: allow horizontal scroll instead of squeezing/breaking */
+    .table-card {
+        overflow-x: auto;
+    }
+
+    table.styled-table {
+        min-width: 600px;
+    }
+
+    .detail-row {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .sidebar {
+        width: min(280px, 80vw);
+    }
+}
+
+/* Charts: make Chart.js canvases behave inside flex/grid containers on small screens */
+@media (max-width: 768px) {
+    .card canvas {
+        max-width: 100%;
+        height: auto !important;
+    }
+}
