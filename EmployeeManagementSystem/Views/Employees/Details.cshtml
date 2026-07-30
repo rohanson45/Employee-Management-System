@@ -1,0 +1,41 @@
+﻿@model EmployeeManagementSystem.Models.Employee
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="page-header">
+    <h2>Employee Details</h2>
+</div>
+
+<div class="form-card">
+    <div class="detail-row">
+        <span class="detail-label">Full Name</span>
+        <span class="detail-value">@Html.DisplayFor(model => model.FullName)</span>
+    </div>
+    <div class="detail-row">
+        <span class="detail-label">Email</span>
+        <span class="detail-value">@Html.DisplayFor(model => model.Email)</span>
+    </div>
+    <div class="detail-row">
+        <span class="detail-label">Phone Number</span>
+        <span class="detail-value">@Html.DisplayFor(model => model.PhoneNumber)</span>
+    </div>
+    <div class="detail-row">
+        <span class="detail-label">Salary</span>
+        <span class="detail-value">₹@Html.DisplayFor(model => model.Salary)</span>
+    </div>
+    <div class="detail-row">
+        <span class="detail-label">Date of Joining</span>
+        <span class="detail-value">@Html.DisplayFor(model => model.DateOfJoining)</span>
+    </div>
+    <div class="detail-row">
+        <span class="detail-label">Department</span>
+        <span class="detail-value">@(Model.Department?.DepartmentName ?? "N/A")</span>
+    </div>
+
+    <div class="form-actions">
+        <a asp-action="Edit" asp-route-employeeid="@Model?.EmployeeId" class="btn-create">Edit</a>
+        <a asp-action="Index" class="btn-cancel">Back to List</a>
+    </div>
+</div>
